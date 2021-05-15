@@ -1,0 +1,96 @@
+<mat-horizontal-stepper [linear]="true">
+	<mat-step [stepControl]="setupForm" class="step">
+		<form [formGroup]="setupForm" class="container" autocomplete="off">
+			<div class="basic">
+				<ng-template matStepLabel>Basic configuration</ng-template>
+				<div>
+					<h3>General configuration</h3>
+					<mat-form-field>
+						<mat-label>URL</mat-label>
+						<input matInput placeholder="http://localhost:5000" required formControlName="url">
+						<mat-error *ngIf="setupForm.controls.url.hasError('required')">
+							Required
+						</mat-error>
+					</mat-form-field>
+				</div>
+				<mat-divider [vertical]="true"></mat-divider>
+				<div>
+					<h3>Database configuration</h3>
+					<div>
+						<mat-radio-group aria-label="Select a database" value="2">
+							<mat-radio-button disabled value="1">SQLite</mat-radio-button>
+							<mat-radio-button value="2">PostgreSQL</mat-radio-button>
+						</mat-radio-group>
+					</div>
+					<mat-form-field>
+						<mat-label>Server URL</mat-label>
+						<input matInput placeholder="127.0.0.1" required formControlName="psqlServer">
+						<mat-error *ngIf="setupForm.controls.url.hasError('required')">
+							Required
+						</mat-error>
+					</mat-form-field>
+					<mat-form-field>
+						<mat-label>Port</mat-label>
+						<input matInput placeholder="5432" required formControlName="psqlPort">
+						<mat-error *ngIf="setupForm.controls.url.hasError('required')">
+							Required
+						</mat-error>
+					</mat-form-field>
+					<mat-form-field>
+						<mat-label>Database</mat-label>
+						<input matInput placeholder="kyooDB" required formControlName="psqlDb">
+						<mat-error *ngIf="setupForm.controls.url.hasError('required')">
+							Required
+						</mat-error>
+					</mat-form-field>
+					<mat-form-field>
+						<mat-label>Database User</mat-label>
+						<input autocomplete="off" matInput placeholder="kyoo" required formControlName="psqlUser">
+						<mat-error *ngIf="setupForm.controls.url.hasError('required')">
+							Required
+						</mat-error>
+					</mat-form-field>
+					<mat-form-field>
+						<mat-label>Database Password</mat-label>
+						<input autocomplete="off" matInput type="password" required  formControlName="psqlPassword">
+						<mat-error *ngIf="setupForm.controls.url.hasError('required')">
+							Required
+						</mat-error>
+					</mat-form-field>
+					<div>
+						<button mat-raised-button color="accent">Test connection</button>
+					</div>
+				</div>
+			</div>
+			<div class="step-buttons">
+				<button mat-button matStepperNext>Next</button>
+			</div>
+		</form>
+	</mat-step>
+	<mat-step [stepControl]="userForm" class="step">
+		<form [formGroup]="userForm" class="container" autocomplete="off">
+			<ng-template matStepLabel>Admin User</ng-template>
+			<div>
+				<!--TODO list users and allow the selection of one-->
+				<button>Create a new user</button>
+			</div>
+			<div class="step-buttons">
+				<button mat-button matStepperPrevious>Previous</button>
+				<button mat-button matStepperNext>Next</button>
+			</div>
+		</form>
+	</mat-step>
+	<mat-step [stepControl]="libraryForm" class="step">
+		<form [formGroup]="libraryForm" class="container" autocomplete="off">
+			<ng-template matStepLabel>Create libraries</ng-template>
+			<div>
+				<!--TODO list libraries-->
+				<button>Create a new library</button>
+			</div>
+			<div class="step-buttons">
+				<button mat-button matStepperPrevious>Previous</button>
+				<button mat-button matStepperNext>Next</button>
+			</div>
+		</form>
+	</mat-step>
+</mat-horizontal-stepper>

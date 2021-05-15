@@ -16,6 +16,7 @@ import { LibraryService } from "./services/api.service";
 // noinspection ES6UnusedImports
 import * as $ from "jquery";
 import ChangeEvent = JQuery.ChangeEvent;
+import { QuickstartComponent } from "./pages/quickstart/quickstart.component";
 
 @Component({
 	selector: "app-root",
@@ -61,6 +62,11 @@ export class AppComponent
 		AppComponent.isMobile = !!navigator.userAgent.match(/Mobi/);
 		if (!AppComponent.isMobile)
 			document.body.classList.add("hoverEnabled");
+
+		this.dialog.open(QuickstartComponent, {
+			width: "60%",
+			height: "70%",
+		});
 	}
 
 	get isAuthenticated(): boolean

@@ -48,6 +48,10 @@ import { ShowGridComponent } from "./components/show-grid/show-grid.component";
 import { MatBadgeModule } from "@angular/material/badge";
 import { StartupService } from "./services/startup.service";
 import { LongPressDirective } from "./misc/long-press.directive";
+import { QuickstartComponent } from './pages/quickstart/quickstart.component';
+import { MatStepperModule } from "@angular/material/stepper";
+import { MatDividerModule } from "@angular/material/divider";
+import { MatRadioModule } from "@angular/material/radio";
 
 
 @NgModule({
@@ -71,7 +75,8 @@ import { LongPressDirective } from "./misc/long-press.directive";
 		BufferToWidthPipe,
 		VolumeToButtonPipe,
 		SupportedButtonPipe,
-		LongPressDirective
+		LongPressDirective,
+		QuickstartComponent
 	],
 	imports: [
 		BrowserModule,
@@ -102,7 +107,10 @@ import { LongPressDirective } from "./misc/long-press.directive";
 		MatExpansionModule,
 		InfiniteScrollModule,
 		MatBadgeModule,
-		HammerModule
+		HammerModule,
+		MatStepperModule,
+		MatDividerModule,
+		MatRadioModule
 	],
 	bootstrap: [AppComponent],
 	exports: [
