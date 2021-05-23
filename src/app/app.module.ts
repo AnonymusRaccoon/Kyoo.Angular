@@ -48,6 +48,8 @@ import { ShowGridComponent } from "./components/show-grid/show-grid.component";
 import { MatBadgeModule } from "@angular/material/badge";
 import { StartupService } from "./services/startup.service";
 import { LongPressDirective } from "./misc/long-press.directive";
+import { AdminRoutingModule } from "./admin/admin-routing.module";
+import { AdminModule } from "./admin/admin.module";
 
 
 @NgModule({
@@ -77,6 +79,7 @@ import { LongPressDirective } from "./misc/long-press.directive";
 		BrowserModule,
 		HttpClientModule,
 		AuthRoutingModule,
+		AdminRoutingModule,
 		AppRoutingModule,
 		BrowserAnimationsModule,
 		MatSnackBarModule,
@@ -97,6 +100,7 @@ import { LongPressDirective } from "./misc/long-press.directive";
 		MatTabsModule,
 		MatCheckboxModule,
 		AuthModule,
+		AdminModule,
 		MatChipsModule,
 		MatAutocompleteModule,
 		MatExpansionModule,
