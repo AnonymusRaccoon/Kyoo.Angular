@@ -1,5 +1,6 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { ConfigurationSection } from "../models/configuration-section";
+import { OptionChanged } from "../models/option-changed";
 
 @Component({
 	selector: "app-section",
@@ -10,4 +11,5 @@ export class SectionComponent
 {
 	@Input() section: ConfigurationSection;
 	@Input() config: any;
+	@Output() changed = new EventEmitter<OptionChanged>();
 }

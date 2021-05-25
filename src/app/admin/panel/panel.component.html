@@ -8,10 +8,11 @@
 			<button mat-icon-button aria-label="Save changes" matTooltip="Save changes">
 				<mat-icon>save</mat-icon>
 			</button>
-			<span>{{getChanges()}} changes</span>
+			<span>{{changed.size}} changes</span>
 		</mat-toolbar>
 		<div>
-			<app-section *ngFor="let item of this.items" [section]="item" [config]="config"></app-section>
+			<app-section *ngFor="let item of this.items" [section]="item" [config]="config" (changed)="onOptionChanged($event)">
+			</app-section>
 		</div>
 	</mat-sidenav-content>
 
