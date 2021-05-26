@@ -5,10 +5,10 @@
 
 	<mat-sidenav-content class="content">
 		<mat-toolbar class="toolbar">
-			<button mat-icon-button aria-label="Save changes" matTooltip="Save changes">
+			<button mat-icon-button aria-label="Save changes" matTooltip="Save changes" (click)="onSave()">
 				<mat-icon>save</mat-icon>
 			</button>
-			<span>{{changed.size}} changes</span>
+			<span>{{changedCount}} changes</span>
 		</mat-toolbar>
 		<div>
 			<app-section *ngFor="let item of this.items" [section]="item" [config]="config" (changed)="onOptionChanged($event)">

@@ -13,7 +13,11 @@ export class PanelComponent
 {
 	items: ConfigurationSection[];
 	config: any;
-	changed = new Map<string, string>();
+	changed: {[key: string]: string} = {};
+	get changedCount(): number
+	{
+		return Object.keys(this.changed).length;
+	}
 
 	constructor(private route: ActivatedRoute,
 	            private http: HttpClient)
@@ -28,14 +32,14 @@ export class PanelComponent
 	onOptionChanged(event: OptionChanged): void
 	{
 		if (event.newValue === event.oldValue)
-			this.changed.delete(event.slug);
+			this.changed[event.slug] = undefined;
 		else
-			this.changed.set(event.slug, event.newValue);
+			this.changed[event.slug] = event.newValue;
 	}
 
 	onSave(): void
 	{
 		this.http.put("/api/config", this.changed)
-			.subscribe();
+			.subscribe(x => console.log(x));
 	}
 }
