@@ -1,0 +1,19 @@
+<mat-sidenav-container class="admin-panel" autosize>
+	<mat-sidenav opened class="sidenav-container" mode="side" fixedInViewport fixedTopGap="64">
+		<p *ngFor="let item of this.items">{{item.name}}</p>
+	</mat-sidenav>
+
+	<mat-sidenav-content class="content">
+		<mat-toolbar class="toolbar">
+			<button mat-icon-button aria-label="Save changes" matTooltip="Save changes" (click)="onSave()">
+				<mat-icon>save</mat-icon>
+			</button>
+			<span>{{changedCount}} changes</span>
+		</mat-toolbar>
+		<div>
+			<app-section *ngFor="let item of this.items" [section]="item" [config]="config" (changed)="onOptionChanged($event)">
+			</app-section>
+		</div>
+	</mat-sidenav-content>
+
+</mat-sidenav-container>

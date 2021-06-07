@@ -52,6 +52,8 @@ import { QuickstartComponent } from './pages/quickstart/quickstart.component';
 import { MatStepperModule } from "@angular/material/stepper";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatRadioModule } from "@angular/material/radio";
+import { AdminRoutingModule } from "./admin/admin-routing.module";
+import { AdminModule } from "./admin/admin.module";
 
 
 @NgModule({
@@ -82,6 +84,7 @@ import { MatRadioModule } from "@angular/material/radio";
 		BrowserModule,
 		HttpClientModule,
 		AuthRoutingModule,
+		AdminRoutingModule,
 		AppRoutingModule,
 		BrowserAnimationsModule,
 		MatSnackBarModule,
@@ -102,6 +105,7 @@ import { MatRadioModule } from "@angular/material/radio";
 		MatTabsModule,
 		MatCheckboxModule,
 		AuthModule,
+		AdminModule,
 		MatChipsModule,
 		MatAutocompleteModule,
 		MatExpansionModule,

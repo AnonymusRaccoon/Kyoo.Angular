@@ -1,0 +1,6 @@
+<h3>{{section.name}}</h3>
+
+<app-option *ngFor="let option of section.options" [option]="option" [config]="config"
+			(changed)="this.changed.emit($event)">
+</app-option>
+<br/>
