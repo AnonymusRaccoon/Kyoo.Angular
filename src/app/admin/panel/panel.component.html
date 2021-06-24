@@ -1,6 +1,7 @@
 <mat-sidenav-container class="admin-panel" autosize>
 	<mat-sidenav opened class="sidenav-container" mode="side" fixedInViewport fixedTopGap="64">
 		<p *ngFor="let item of this.items">{{item.name}}</p>
+		<p>Plugins</p>
 	</mat-sidenav>
 
 	<mat-sidenav-content class="content">
@@ -14,6 +15,7 @@
 			<app-section *ngFor="let item of this.items" [section]="item" [config]="config" (changed)="onOptionChanged($event)">
 			</app-section>
 		</div>
+		<app-plugin-section></app-plugin-section>
 	</mat-sidenav-content>
 
 </mat-sidenav-container>

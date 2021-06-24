@@ -1,0 +1,13 @@
+<h3>Plugins</h3>
+
+<mat-card *ngFor="let repository of this.repositories">
+	<mat-card-header>
+		<mat-card-title>{{repository.name}}</mat-card-title>
+		<mat-card-subtitle>{{repository.description}}</mat-card-subtitle>
+	</mat-card-header>
+	<mat-card-content>
+		<button *ngFor="let plugin of repository.plugins" (click)="install(plugin)">
+			Install {{plugin.name}}
+		</button>
+	</mat-card-content>
+</mat-card>
