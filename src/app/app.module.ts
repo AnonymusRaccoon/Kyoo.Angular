@@ -50,6 +50,7 @@ import { StartupService } from "./services/startup.service";
 import { LongPressDirective } from "./misc/long-press.directive";
 import { DatetimeInterceptorService } from "./services/datetime-interceptor.service";
 import { MatDatepickerModule } from "@angular/material/datepicker";
+import { HomepageComponent } from './pages/homepage/homepage.component';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 		BufferToWidthPipe,
 		VolumeToButtonPipe,
 		SupportedButtonPipe,
-		LongPressDirective
+		LongPressDirective,
+		HomepageComponent
 	],
 	imports: [
 		BrowserModule,

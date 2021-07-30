@@ -23,8 +23,15 @@ import { SearchComponent } from "./pages/search/search.component";
 import { SearchResult } from "./models/search-result";
 import { PlayerComponent } from "./pages/player/player.component";
 import { WatchItem } from "./models/watch-item";
+import { HomepageComponent } from "./pages/homepage/homepage.component";
 
 const routes: Routes = [
+	{path: "", component: HomepageComponent, pathMatch: "full",
+		resolve: {show: ItemResolver.forResource<Show>("shows/akudama-drive?fields=studio,genres,seasons,externalIDs")},
+		// canLoad: [AuthGuard.forPermissions("read")],
+		// canActivate: [AuthGuard.forPermissions("read")],
+		runGuardsAndResolvers: "always"
+	},
 	{path: "browse", component: ItemsGridComponent, pathMatch: "full",
 		resolve: {items: PageResolver.forResource<LibraryItem>("items", ItemsGridComponent.routeMapper)},
 		// canLoad: [AuthGuard.forPermissions("read")],
@@ -90,9 +97,6 @@ const routes: Routes = [
 		// canActivate: [AuthGuard.forPermissions("play")]
 	},
 
-	// TODO implement an home page.
-
-	{path: "", pathMatch: "full", redirectTo: "/browse"},
 	{path: "**", component: NotFoundComponent}
 ];
 
