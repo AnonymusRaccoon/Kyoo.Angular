@@ -78,4 +78,7 @@ export class HomepageComponent implements AfterViewInit, OnDestroy
 	  this.scrollZone.style.marginTop = null;
 	  this.scrollZone.style.maxHeight = null;
   }
+  scroll(): void {
+	  const opacity: number = 2 * this.scrollZone.scrollTop / this.backdrop.clientHeight;
+  }
 }
