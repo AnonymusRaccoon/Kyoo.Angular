@@ -2,11 +2,17 @@
 	<div class="containerBox">
 		<div class="textBox">
 			<h2 class="show-title">{{this.show.title}}</h2>
+			<br>
 			<h6 class="show-overview">{{this.show.overview}}</h6>
+			<br>
+			<button mat-raised-button matTooltipPosition="above" matTooltip="Play" class="mr-5" color="accent" (click)="playClicked()">
+				Watch <mat-icon>play_arrow</mat-icon>
+			</button>
 		</div>
 		<div class="backdrop">
 			<img id="backdrop" [src]="this.show.backdrop" alt="backdrop" />
 		</div>
+
 	</div>
 
 </div>

@@ -59,7 +59,15 @@ export class HomepageComponent implements AfterViewInit, OnDestroy
 	// {
 	// 	return this.sanitizer.bypassSecurityTrustStyle(`url(${item.poster})`);
 	// }
-
+	playClicked(): void
+	{
+		if (this.show.isMovie) {
+			this.router.navigate(["/watch/" + this.show.slug]);
+		}
+		else {
+			this.router.navigate(["/watch/" + this.show.slug + "-s1e1"]);
+		}
+	}
   ngAfterViewInit(): void
   {
 	  this.scrollZone = document.getElementById("main");
