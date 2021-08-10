@@ -35,23 +35,61 @@
 		right: 0;
 		background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.6) 100%),
 		   				  linear-gradient(to left,rgba(0, 0, 0, 0.7),rgba(0,0,0,0),rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 1));
-
 	}
 }
+
 .textBox
 {
-	position: absolute;
-	top:40%;
-	left:1.5%;
-	right: 70%;
+	position: static;
 	text-align: justify;
+	//top:90%;
+	margin-top: -10%;
+	padding-left: 3%;
+	padding-right: 3%;
 
+	@include media-breakpoint-up(md)
+	{
+		top:55%;
+		position: absolute;
+		right: 50%;
+	}
+
+	@include media-breakpoint-up(lg)
+	{
+		top:55%;
+		position: absolute;
+		right: 60%;
+	}
+
+	@include media-breakpoint-up(xl)
+	{
+		position: absolute;
+		top:55%;
+		right: 60%;
+	}
 }
-.containerBox {
+
+.recommendation {
 	position: relative;
 }
 
 .show-title
 {
-	font-size: xxx-large;
+	font-size: x-large;
+	color: white;
+	font-weight: bold;
+	opacity: 100%;
+	@include media-breakpoint-up(lg)
+	{
+		font-size: xx-large;
+	}
+
+	@include media-breakpoint-up(xl)
+	{
+		font-size: xxx-large;
+	}
+}
+.show-overview
+{
+	opacity: 100%;
 }
