@@ -1,0 +1,62 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+		<TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+		<IsPackable>false</IsPackable>
+		<DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules/**</DefaultItemExcludes>
+		<SpaRoot>./</SpaRoot>
+		
+		<!-- Set this to true if you enable server-side prerendering -->
+		<BuildServerSideRenderer>false</BuildServerSideRenderer>
+
+		<Company>SDG</Company>
+		<Authors>Zoe Roux</Authors>
+		<RepositoryUrl>https://github.com/AnonymusRaccoon/Kyoo</RepositoryUrl>
+		<LangVersion>default</LangVersion>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="5.0.0-preview.8.20414.8" />
+		<PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="5.0.8" />
+		<ProjectReference Include="../Kyoo.Common/Kyoo.Common.csproj" />
+	</ItemGroup>
+
+	<Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish" Condition="'$(SkipWebApp)' != 'true'">
+		<Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+		<Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --prod" />
+		<Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr -- --prod" Condition="'$(BuildServerSideRenderer)' == 'true'" />
+
+		<ItemGroup>
+			<DistFiles Include="$(SpaRoot)dist/**; $(SpaRoot)dist-server/**" />
+			<DistFiles Include="$(SpaRoot)node_modules/**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
+			<ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+				<RelativePath>wwwroot/%(DistFiles.Filename)%(DistFiles.Extension)</RelativePath>
+				<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+				<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			</ResolvedFileToPublish>
+		</ItemGroup>
+	</Target>
+
+	<Target Name="Publish static files" AfterTargets="ComputeFilesToPublish">
+		<ItemGroup>
+			<ResolvedFileToPublish Include="@(StaticFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+				<RelativePath>wwwroot/%(StaticFiles.RecursiveDir)%(StaticFiles.Filename)%(StaticFiles.Extension)</RelativePath>
+				<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+				<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			</ResolvedFileToPublish>
+		</ItemGroup>
+	</Target>
+
+	<Target Name="Prepare the web app" AfterTargets="Build" Condition="$(Configuration) == 'Debug' and '$(SkipWebApp)' != 'true'">
+		<Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+	</Target>
+
+	<Target Name="Prepare static files" AfterTargets="Build" Condition="$(Configuration) == 'Debug'">
+		<Copy SourceFiles="@(StaticFiles)" DestinationFolder="$(OutputPath)/wwwroot/%(RecursiveDir)" />
+	</Target>
+
+	<Target Name="Symlink views to output - Linux" AfterTargets="Build" Condition="$(Configuration) == 'Debug' And $(OS) == 'Unix'">
+		<Exec WorkingDirectory="$(OutputPath)" Command="ln -fs $(ProjectDir)" />
+	</Target>
+</Project>
