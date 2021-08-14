@@ -6,7 +6,7 @@
 		<IsPackable>false</IsPackable>
 		<DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules/**</DefaultItemExcludes>
 		<SpaRoot>./</SpaRoot>
-		
+
 		<!-- Set this to true if you enable server-side prerendering -->
 		<BuildServerSideRenderer>false</BuildServerSideRenderer>
 
@@ -15,48 +15,44 @@
 		<RepositoryUrl>https://github.com/AnonymusRaccoon/Kyoo</RepositoryUrl>
 		<LangVersion>default</LangVersion>
 	</PropertyGroup>
-	
+
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="5.0.0-preview.8.20414.8" />
 		<PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="5.0.8" />
 		<ProjectReference Include="../Kyoo.Common/Kyoo.Common.csproj" />
 	</ItemGroup>
 
-	<Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish" Condition="'$(SkipWebApp)' != 'true'">
+	<ItemGroup>
+		<None Remove="$(SpaRoot)wwwroot/**;" />
+		<Content Include="$(SpaRoot)wwwroot/**">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		
+		<None Remove="$(SpaRoot)dist/**; $(SpaRoot)dist-server/**" />
+		<Content Include="$(SpaRoot)dist/**; $(SpaRoot)dist-server/**" Visible="false" Condition="'$(Configuration)' != 'Debug'">
+			<Link>wwwroot/%(RecursiveDir)%(Filename)%(Extension)</Link>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition="'$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules')">
+		<Exec Command="node --version" ContinueOnError="true">
+			<Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+		</Exec>
+		<Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+		<Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+		<Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+	</Target>
+
+	<Target Name="PublishRunWebpack" BeforeTargets="Build" Condition="'$(SkipWebApp)' != 'true' And '$(Configuration)' != 'Debug'">
+		<Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
 		<Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
 		<Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --prod" />
 		<Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr -- --prod" Condition="'$(BuildServerSideRenderer)' == 'true'" />
-
-		<ItemGroup>
-			<DistFiles Include="$(SpaRoot)dist/**; $(SpaRoot)dist-server/**" />
-			<DistFiles Include="$(SpaRoot)node_modules/**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
-			<ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
-				<RelativePath>wwwroot/%(DistFiles.Filename)%(DistFiles.Extension)</RelativePath>
-				<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-				<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-			</ResolvedFileToPublish>
-		</ItemGroup>
 	</Target>
 
-	<Target Name="Publish static files" AfterTargets="ComputeFilesToPublish">
-		<ItemGroup>
-			<ResolvedFileToPublish Include="@(StaticFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
-				<RelativePath>wwwroot/%(StaticFiles.RecursiveDir)%(StaticFiles.Filename)%(StaticFiles.Extension)</RelativePath>
-				<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-				<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-			</ResolvedFileToPublish>
-		</ItemGroup>
-	</Target>
-
-	<Target Name="Prepare the web app" AfterTargets="Build" Condition="$(Configuration) == 'Debug' and '$(SkipWebApp)' != 'true'">
-		<Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
-	</Target>
-
-	<Target Name="Prepare static files" AfterTargets="Build" Condition="$(Configuration) == 'Debug'">
-		<Copy SourceFiles="@(StaticFiles)" DestinationFolder="$(OutputPath)/wwwroot/%(RecursiveDir)" />
-	</Target>
-
-	<Target Name="Symlink views to output - Linux" AfterTargets="Build" Condition="$(Configuration) == 'Debug' And $(OS) == 'Unix'">
-		<Exec WorkingDirectory="$(OutputPath)" Command="ln -fs $(ProjectDir)" />
+	<Target Name="SymlinkViews" AfterTargets="Build" Condition="$(Configuration) == 'Debug'">
+		<Exec WorkingDirectory="$(ProjectDir)../Kyoo" Command="ln -fs '$(ProjectDir)' $(OutDir)" Condition="$(OS) == 'Unix'" />
+		<Exec WorkingDirectory="$(ProjectDir)../Kyoo" Command="mklink /D '$(OutDir)Kyoo.WebApp' '$(ProjectDir)'" Condition="$(OS) != 'Unix'" />
 	</Target>
 </Project>
