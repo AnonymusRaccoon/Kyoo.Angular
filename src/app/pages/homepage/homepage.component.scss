@@ -15,13 +15,13 @@
 		margin-left: auto;
 		margin-right: auto;
 		width: 100%;
-		max-height: 100vh;
+		max-height: 80vh;
 		object-fit: cover;
 		min-height: 50vh;
 
 		@include media-breakpoint-up(md)
 		{
-			min-height: 100vh;
+			min-height: 80vh;
 		}
 	}
 
@@ -35,37 +35,42 @@
 		right: 0;
 		background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.6) 100%),
 		   				  linear-gradient(to left,rgba(0, 0, 0, 0.7),rgba(0,0,0,0),rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 1));
+		//@include media-breakpoint-down(md){
+		//	background-image:linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgb(11, 18, 41) 100%),
+		//					linear-gradient(to left,rgba(0, 0, 0, 0.7),rgba(0,0,0,0),rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 1));
+		//}
 	}
 }
 
 .textBox
 {
-	position: static;
 	text-align: justify;
-	//top:90%;
-	margin-top: -10%;
-	padding-left: 3%;
-	padding-right: 3%;
+	padding-left: 2.5em;
 
+	@include media-breakpoint-down(md){
+		position: relative;
+		margin-top: -30%;
+		padding-right: 3%;
+	}
 	@include media-breakpoint-up(md)
 	{
-		top:55%;
 		position: absolute;
-		right: 50%;
+		top:30vh;
+		right: 60%;
 	}
 
 	@include media-breakpoint-up(lg)
 	{
-		top:55%;
 		position: absolute;
-		right: 60%;
+		top:30vh;
+		right: 70%;
 	}
 
 	@include media-breakpoint-up(xl)
 	{
 		position: absolute;
-		top:55%;
-		right: 60%;
+		top:30vh;
+		right: 70%;
 	}
 }
 
@@ -73,23 +78,34 @@
 	position: relative;
 }
 
-.show-title
+.title
 {
-	font-size: x-large;
 	color: white;
 	font-weight: bold;
 	opacity: 100%;
-	@include media-breakpoint-up(lg)
-	{
-		font-size: xx-large;
-	}
-
-	@include media-breakpoint-up(xl)
-	{
-		font-size: xxx-large;
-	}
 }
 .show-overview
 {
 	opacity: 100%;
+	@include media-breakpoint-down(md){
+		position: absolute;
+		visibility: hidden;
+	}
+	@include media-breakpoint-up(md){
+		visibility: visible;
+	}
+	@include media-breakpoint-up(lg){
+		visibility: visible;
+	}
+	@include media-breakpoint-up(xl){
+		visibility: visible;
+	}
+}
+.arrival
+{
+	padding-left: 2.5em;
+}
+.resume
+{
+	padding-left: 2.5em;
 }

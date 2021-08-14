@@ -47,11 +47,21 @@ export class HomepageComponent implements AfterViewInit, OnDestroy
 		this.route.data.subscribe(data =>
 		{
 			this.show = data.show;
-			//
-			// this.peopleService.getFromShow(this.show.slug).subscribe(x => this.people = x);
 
-			// if (this.show.isMovie)
-			// 	return;
+
+			this.peopleService.getFromShow(this.show.slug).subscribe(x => this.people = x);
+
+			if (this.show.isMovie)
+				return;
+
+			this.seasons = this.show.seasons;
+			if (!this.seasons.find(y => y.seasonNumber === this.season))
+			{
+				this.season = 1;
+				this.getEpisodes(1);
+			}
+			else
+				this.getEpisodes(this.season);
 		});
 	}
 
@@ -68,25 +78,47 @@ export class HomepageComponent implements AfterViewInit, OnDestroy
 			this.router.navigate(["/watch/" + this.show.slug + "-s1e1"]);
 		}
 	}
-  ngAfterViewInit(): void
-  {
-	  this.scrollZone = document.getElementById("main");
-	  this.toolbar = document.getElementById("toolbar");
-	  this.backdrop = document.getElementById("backdrop");
-	  this.toolbar.setAttribute("style", `background-color: rgba(0, 0, 0, 0) !important`);
-	  this.scrollZone.style.marginTop = "0";
-	  this.scrollZone.style.maxHeight = "100vh";
-	  // this.scrollZone.addEventListener("scroll", () => this.scroll());
-  }
 
-  ngOnDestroy(): void
-  {
-	  this.title.setTitle("Kyoo");
-	  this.toolbar.setAttribute("style", `background-color: #000000 !important`);
-	  this.scrollZone.style.marginTop = null;
-	  this.scrollZone.style.maxHeight = null;
-  }
-  scroll(): void {
-	  const opacity: number = 2 * this.scrollZone.scrollTop / this.backdrop.clientHeight;
-  }
+	infoClicked(): void
+	{
+		if (this.show.isMovie) {
+			this.router.navigate(["/show/" + this.show.slug]);
+		}
+		else {
+			this.router.navigate(["/show/" + this.show.slug + "?season=1"]);
+		}
+	}
+	ngAfterViewInit(): void
+	{
+		this.scrollZone = document.getElementById("main");
+		this.toolbar = document.getElementById("toolbar");
+		this.backdrop = document.getElementById("backdrop");
+		this.toolbar.setAttribute("style", `background-color: rgba(0, 0, 0, 0) !important`);
+		this.scrollZone.style.marginTop = "0";
+		this.scrollZone.style.maxHeight = "100vh";
+		this.scrollZone.addEventListener("scroll", () => this.scroll());
+	}
+
+	ngOnDestroy(): void
+	{
+		this.title.setTitle("Kyoo");
+		this.toolbar.setAttribute("style", `background-color: #000000 !important`);
+		this.scrollZone.style.marginTop = null;
+		this.scrollZone.style.maxHeight = null;
+		this.scrollZone.removeEventListener("scroll", () => this.scroll());
+	}
+	scroll(): void {
+		const opacity: number = 2 * this.scrollZone.scrollTop / this.backdrop.clientHeight;
+		this.toolbar.setAttribute("style", `background-color: rgba(0, 0, 0, ${opacity}) !important`);
+	}
+	getEpisodes(season: number): void
+	{
+		if (season < 0 || this.episodes[season])
+			return;
+
+		this.episodeService.getFromSeasonNumber(this.show.slug, this.season).subscribe(x =>
+		{
+			this.episodes[season] = x;
+		});
+	}
 }
