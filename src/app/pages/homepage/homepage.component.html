@@ -6,7 +6,9 @@
 		<div class="textBox">
 			<h1><p class="title">{{this.show.title}}</p></h1>
 
-			<p class="show-overview">{{this.show.overview}}</p>
+			<div class="show-overview">
+				{{this.show.overview}}
+			</div>
 
 			<button mat-raised-button matTooltipPosition="above" matTooltip="Info" class="mr-5" color="accent" (click)="infoClicked()">
 				More infos <mat-icon>info</mat-icon>
@@ -19,13 +21,13 @@
 	</div>
 	<br>
 	<div class="arrival">
-		<h3><p class="title">New Arrival</p></h3>
+		<h3><p class="title">| New Arrival</p></h3>
 		<app-episodes-list [episodes]="episodes[season]"></app-episodes-list>
 	</div>
 	<br>
 	<br>
 	<div class="resume">
-		<h3><p class="title">Resume</p> </h3>
+		<h3><p class="title">| Resume</p> </h3>
 		<app-episodes-list [episodes]="episodes[season]"></app-episodes-list>
 	</div>
 </div>
