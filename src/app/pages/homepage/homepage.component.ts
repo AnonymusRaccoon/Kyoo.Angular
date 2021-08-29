@@ -81,13 +81,9 @@ export class HomepageComponent implements AfterViewInit, OnDestroy
 
 	infoClicked(): void
 	{
-		if (this.show.isMovie) {
-			this.router.navigate(["/show/" + this.show.slug]);
-		}
-		else {
-			this.router.navigate(["/show/" + this.show.slug + "?season=1"]);
-		}
+		this.router.navigate(["/show/" + this.show.slug]);
 	}
+
 	ngAfterViewInit(): void
 	{
 		this.scrollZone = document.getElementById("main");

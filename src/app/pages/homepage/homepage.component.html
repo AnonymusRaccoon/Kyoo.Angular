@@ -9,7 +9,12 @@
 			<div class="show-overview">
 				{{this.show.overview}}
 			</div>
-
+			<span *ngFor="let genre of this.show.genres; let isLast = last">
+		                 <b><a draggable="false"
+							   href="/genre/{{genre.slug}}"
+							   routerLink="/genre/{{genre.slug}}">{{genre.name}}</a></b>
+				{{isLast ? "" : ", "}}
+			</span>
 			<button mat-raised-button matTooltipPosition="above" matTooltip="Info" class="mr-5" color="accent" (click)="infoClicked()">
 				More infos <mat-icon>info</mat-icon>
 			</button>
