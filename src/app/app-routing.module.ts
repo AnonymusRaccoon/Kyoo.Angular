@@ -18,6 +18,7 @@ import {
 import { Show } from "./models/resources/show";
 import { ItemResolver } from "./services/item-resolver.service";
 import { CollectionComponent } from "./pages/collection/collection.component";
+import { QuickstartComponent } from "./pages/quickstart/quickstart.component";
 import { Collection } from "./models/resources/collection";
 import { SearchComponent } from "./pages/search/search.component";
 import { SearchResult } from "./models/search-result";
@@ -86,6 +87,10 @@ const routes: Routes = [
 
 	{path: "watch/:item", component: PlayerComponent,
 		resolve: {item: ItemResolver.forResource<WatchItem>("watch/:item")},
+		// canLoad: [AuthGuard.forPermissions("play")],
+		// canActivate: [AuthGuard.forPermissions("play")]
+	},
+	{path: "quickstart", component: QuickstartComponent,
 		// canLoad: [AuthGuard.forPermissions("play")],
 		// canActivate: [AuthGuard.forPermissions("play")]
 	},
