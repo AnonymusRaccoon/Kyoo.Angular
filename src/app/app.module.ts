@@ -51,6 +51,7 @@ import { LongPressDirective } from "./misc/long-press.directive";
 import { DatetimeInterceptorService } from "./services/datetime-interceptor.service";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { QuickstartComponent } from './pages/quickstart/quickstart.component';
+import {MatStepperModule} from "@angular/material/stepper";
 
 
 @NgModule({
@@ -108,7 +109,8 @@ import { QuickstartComponent } from './pages/quickstart/quickstart.component';
 		MatBadgeModule,
 		HammerModule,
 		MatDatepickerModule,
-		MatNativeDateModule
+		MatNativeDateModule,
+		MatStepperModule
 	],
 	bootstrap: [AppComponent],
 	exports: [
