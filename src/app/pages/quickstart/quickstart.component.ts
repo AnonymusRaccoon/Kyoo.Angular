@@ -9,6 +9,7 @@ import { BreakpointObserver } from "@angular/cdk/layout";
 import { StepperOrientation } from "@angular/material/stepper";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import { AuthService } from "../../auth/auth.service";
 
 
 @Component({
@@ -17,6 +18,23 @@ import { map } from "rxjs/operators";
 	styleUrls: ["./quickstart.component.scss"]
 })
 export class QuickstartComponent implements OnDestroy, AfterViewInit {
+
+
+	constructor(private route: ActivatedRoute,
+				         public authManager: AuthService,
+				         private snackBar: MatSnackBar,
+				         private sanitizer: DomSanitizer,
+				         private title: Title,
+				         private router: Router,
+				         private dialog: MatDialog,
+				         private http: HttpClient,
+				         private _formBuilder: FormBuilder,
+				         breakpointObserver: BreakpointObserver)
+	{
+		this.title.setTitle("Quickstart");
+		this.stepperOrientation = breakpointObserver.observe("(min-width: 800px)")
+			.pipe(map(({matches}) => matches ? "horizontal" : "vertical"));
+	}
 
 	private scrollZone: HTMLElement;
 	private toolbar: HTMLElement;
@@ -34,23 +52,19 @@ export class QuickstartComponent implements OnDestroy, AfterViewInit {
 
 	isShowDivIf = true;
 
+
+
+	// tslint:disable-next-line:typedef
 	toggleDisplayDivIf() {
 
 		this.isShowDivIf = !this.isShowDivIf;
 
 	}
-	constructor(private route: ActivatedRoute,
-				         private snackBar: MatSnackBar,
-				         private sanitizer: DomSanitizer,
-				         private title: Title,
-				         private router: Router,
-				         private dialog: MatDialog,
-				         private http: HttpClient,
-				         private _formBuilder: FormBuilder,
-				         breakpointObserver: BreakpointObserver) {
-		this.title.setTitle("Quickstart");
-		this.stepperOrientation = breakpointObserver.observe("(min-width: 800px)")
-			.pipe(map(({matches}) => matches ? "horizontal" : "vertical"));
+
+
+	Register(): void
+	{
+		this.authManager.login();
 	}
 
 	ngOnDestroy(): void {

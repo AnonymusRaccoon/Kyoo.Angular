@@ -1,41 +1,43 @@
-<p>Welcome in Quickstart</p>
-
-<img src="logo.jpg" class="logo" alt="Kyoo">
-
-<button (click)="toggleDisplayDivIf()" *ngIf="isShowDivIf">Start Config</button>
+<div class="welcome" *ngIf="isShowDivIf">
+	<img src="logo.jpg" class="logo" alt="Kyoo">
+	<div class="text_box">
+		<br>
+		<h4>Thanks for installing Kyoo</h4>
+		<br>
+		<button (click)="toggleDisplayDivIf()" class="mr-xl-5" color="accent"
+				mat-raised-button matTooltip="Start Configuration" matTooltipPosition="above">
+			<mat-icon>tune</mat-icon>
+			Start Configuration
+		</button>
+	</div>
+</div>
 
 <div class="content" *ngIf="!isShowDivIf">
 	<mat-stepper class="stepper" [orientation]="(stepperOrientation | async)!">
-		<mat-step [stepControl]="firstFormGroup" label="Fill out your name">
+		<mat-step [stepControl]="firstFormGroup" label="Media Library" state="library">
 			<form [formGroup]="firstFormGroup">
-				<mat-form-field appearance="outline">
-					<mat-label>Name</mat-label>
-					<input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-				</mat-form-field>
+				<div>
+
+				</div>
 				<div>
 					<button mat-button matStepperNext>Next</button>
 				</div>
 			</form>
 		</mat-step>
-		<mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+		<mat-step [stepControl]="secondFormGroup" label="Preferred MetaData Language">
 			<form [formGroup]="secondFormGroup">
-				<mat-form-field appearance="fill">
-					<mat-label>Address</mat-label>
-					<input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-						   required>
-				</mat-form-field>
+
 				<div>
 					<button mat-button matStepperPrevious>Back</button>
 					<button mat-button matStepperNext>Next</button>
 				</div>
 			</form>
 		</mat-step>
-		<mat-step [stepControl]="thirdFormGroup" label="Fill out your phone number">
+		<mat-step [stepControl]="thirdFormGroup" label="Remote Access">
 			<form [formGroup]="thirdFormGroup">
-				<mat-form-field appearance="fill">
-					<mat-label>Phone number</mat-label>
-					<input matInput formControlName="thirdCtrl" placeholder="Ex. 12345678" required>
-				</mat-form-field>
+				<div>
+
+				</div>
 				<div>
 					<button mat-button matStepperPrevious>Back</button>
 					<button mat-button matStepperNext>Next</button>
@@ -47,6 +49,7 @@
 			<p>You are now done.</p>
 			<div>
 				<button mat-button matStepperPrevious>Back</button>
+				<button mat-button (click)="Register()">Register</button>
 			</div>
 		</mat-step>
 	</mat-stepper>

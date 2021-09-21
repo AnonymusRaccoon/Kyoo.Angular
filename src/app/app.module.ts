@@ -52,6 +52,7 @@ import { DatetimeInterceptorService } from "./services/datetime-interceptor.serv
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { QuickstartComponent } from './pages/quickstart/quickstart.component';
 import {MatStepperModule} from "@angular/material/stepper";
+import {MatListModule} from "@angular/material/list";
 
 
 @NgModule({
@@ -78,40 +79,41 @@ import {MatStepperModule} from "@angular/material/stepper";
 		LongPressDirective,
   QuickstartComponent
 	],
-	imports: [
-		BrowserModule,
-		HttpClientModule,
-		AuthRoutingModule,
-		AppRoutingModule,
-		BrowserAnimationsModule,
-		MatSnackBarModule,
-		MatProgressBarModule,
-		MatButtonModule,
-		MatIconModule,
-		MatSelectModule,
-		MatMenuModule,
-		MatSliderModule,
-		MatTooltipModule,
-		MatRippleModule,
-		MatCardModule,
-		ReactiveFormsModule,
-		MatInputModule,
-		MatFormFieldModule,
-		MatDialogModule,
-		FormsModule,
-		MatTabsModule,
-		MatCheckboxModule,
-		AuthModule,
-		MatChipsModule,
-		MatAutocompleteModule,
-		MatExpansionModule,
-		InfiniteScrollModule,
-		MatBadgeModule,
-		HammerModule,
-		MatDatepickerModule,
-		MatNativeDateModule,
-		MatStepperModule
-	],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AuthRoutingModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatSnackBarModule,
+        MatProgressBarModule,
+        MatButtonModule,
+        MatIconModule,
+        MatSelectModule,
+        MatMenuModule,
+        MatSliderModule,
+        MatTooltipModule,
+        MatRippleModule,
+        MatCardModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatDialogModule,
+        FormsModule,
+        MatTabsModule,
+        MatCheckboxModule,
+        AuthModule,
+        MatChipsModule,
+        MatAutocompleteModule,
+        MatExpansionModule,
+        InfiniteScrollModule,
+        MatBadgeModule,
+        HammerModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatStepperModule,
+        MatListModule
+    ],
 	bootstrap: [AppComponent],
 	exports: [
 		FallbackDirective
