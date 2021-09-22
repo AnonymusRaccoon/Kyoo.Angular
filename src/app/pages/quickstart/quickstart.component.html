@@ -26,7 +26,52 @@
 		</mat-step>
 		<mat-step [stepControl]="secondFormGroup" label="Preferred MetaData Language">
 			<form [formGroup]="secondFormGroup">
+				<div>
+					<mat-accordion class="accordion">
+						<mat-expansion-panel>
+							<mat-expansion-panel-header>
+								<mat-panel-title>
+									Languages
+								</mat-panel-title>
+								<mat-panel-description class="description">
+									Select preferred languages for metadata
+									<mat-icon>language</mat-icon>
+								</mat-panel-description>
+							</mat-expansion-panel-header>
+							<mat-form-field appearance="fill" class="lang">
+								<mat-label>Language</mat-label>
+								<mat-select [formControl]="language" multiple [(ngModel)]="default">
+									<input type="text" matInput formControlName="profile" >
+									<mat-option *ngFor="let language of languageList"
+													[value]="language">{{language}}</mat-option>
+								</mat-select>
+							</mat-form-field>
+							<button mat-button (click)="reset()">reset selection</button>
+						</mat-expansion-panel>
+						<mat-expansion-panel>
+							<mat-expansion-panel-header>
+								<mat-panel-title>
+									Country
+								</mat-panel-title>
+								<mat-panel-description class="description">
+									Select your country
+									<mat-icon> place</mat-icon>
+								</mat-panel-description>
+							</mat-expansion-panel-header>
+							<mat-form-field class="example-full-width" appearance="fill">
+								<mat-label>Country</mat-label>
+								<input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+								<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+									<mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+										{{option.name}}
+									</mat-option>
+								</mat-autocomplete>
+							</mat-form-field>
 
+						</mat-expansion-panel>
+					</mat-accordion>
+
+				</div>
 				<div>
 					<button mat-button matStepperPrevious>Back</button>
 					<button mat-button matStepperNext>Next</button>
